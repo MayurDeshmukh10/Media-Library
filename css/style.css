@@ -1,0 +1,12 @@
+body {
+    background-image: url("../images/back.jpg");
+    background-attachment: fixed;
+}
+
+.main-body{
+    padding-top: 30px;
+}
+
+.thumbnail {
+    word-wrap: break-word;
+}

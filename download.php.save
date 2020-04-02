@@ -1,0 +1,13 @@
+<?php
+
+$filepathdfsd
+
+if (!empty($_GET['file'])) {
+	$filename = basename($_GET['file']);
+} else {
+	return;
+}
+
+
+header("Content-disposition: attachment; filename=" . $filename);
+header("Content-type: video/mp4 
