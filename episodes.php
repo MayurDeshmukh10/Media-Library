@@ -21,7 +21,7 @@ private_zone();
 <body class="main-body">
 <div class="container">
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-    <h3 class="navbar-text">Mayur's Media Library (Development Build)</h3>
+    <h3 class="navbar-text">Mayur's Media Library (Development)</h3>
     <div class="collapse navbar-collapse">	
         <div class="nav navbar-nav navbar-right">
             <li class="dropdown">
@@ -43,8 +43,8 @@ else echo "Download Mode";
 ?>
               <b class="caret"></b></a>
               <ul class="dropdown-menu">
-                <li><a href="index.php?download=m3u">Download Mode</a></li>
-                <li><a href="index.php?download=ext">Stream Mode</a></li>
+                <li><a href="episodes.php?download=m3u">Download Mode</a></li>
+                <li><a href="episodes.php?download=ext">Stream Mode</a></li>
               </ul>
             </li>
         </div>
@@ -62,7 +62,7 @@ else echo "Download Mode";
             </li>
         </div>
 	<div class="nav navbar-nav navbar-right">
-	   <li><a href="tv_series.php">TV Series</a></li>
+	   <li><a href="#">TV Series</a></li>
 	</div>
         <form class="navbar-form navbar-right">
         </form>
@@ -73,11 +73,12 @@ else echo "Download Mode";
     </div>
 <?php
 empty_temp_files($temp_dir);
-$files = glob("$root_dir/*");
+$episodes_path = $_GET['episodes'];
+$files = glob("$episodes_path/*");
 $i = 0;
 foreach($files as $file) {
     if (isset(pathinfo($file)['extension']))
-    	$ext = pathinfo($file)['extension'];
+        $ext = pathinfo($file)['extension'];
     else $ext ='';
     $film = "";
     if (!is_dir($file) and in_array($ext, $video_extension))
@@ -89,7 +90,6 @@ foreach($files as $file) {
     echo "<div class='col-md-3 col-sm-3'><div class='thumbnail'>";
     if ($_SESSION['download'] == 'm3u')
         echo "<a href='download.php?file=$file&extension=$ext'>";
-    //else echo "<a href='player.php?file_to_play=$file target=_blank'>";
     else echo "<a href='stream.php?file=$file&exte=$ext' target=_blank'>";
     echo "<img src='$film[image]' alt='$film[name]'>";
     echo "<div class='caption'>$film[name]</div>";
