@@ -48,19 +48,7 @@ else echo "Download Mode";
               </ul>
             </li>
         </div>
-	<div class="nav navbar-nav navbar-right">
-            <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              Categories
-              <b class="caret"></b></a>
-              <ul class="dropdown-menu">
-                <li><a href="#">Action</a></li>
-		<li><a href="#">Science Fiction</a></li>
-		<li><a href="#">Comedy</a></li>
-		<li><a href="#">Horror</a></li>	
-              </ul>
-            </li>
-        </div>
+	
 	<div class="nav navbar-nav navbar-right">
 	   <li><a href="index.php">Movies</a></li>
 	</div>
@@ -69,7 +57,7 @@ else echo "Download Mode";
     </div>
 </nav>
     <div class="page-header">
-        <h1>Media Library <small>just a media library...</small></h1>
+        <h1>TV Series</h1>
     </div>
 <?php
 empty_temp_files($temp_dir);

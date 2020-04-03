@@ -1,7 +1,21 @@
 <?php
 include "lib.php";
-if (isset($_GET['logout'])) unset($_SESSION['username']);
+$cn = mysqli_connect("127.0.0.1", "root", "mayur1092", "media_library");
+if (isset($_GET['logout']))
+{
+	mysqli_query($cn,"DELETE FROM active_users WHERE username='".$_SESSION['username']."' ");
+ 	unset($_SESSION['username']);
+}
+	
 private_zone();
+$c_user = $_SESSION['username'];
+if(session_status() == 1)
+{
+	mysqli_query($cn,"DELETE FROM active_users WHERE username='".$_SESSION['username']."' ");
+}
+
+$active = mysqli_query($cn,"SELECT * from active_users");
+$active_users = mysqli_num_rows($active);
 ?>
 <!DOCTYPE html>
 <html>
@@ -30,6 +44,7 @@ private_zone();
               <?=$_SESSION['username']?>
               <b class="caret"></b></a>
               <ul class="dropdown-menu">
+		<li><a href="reset_password.php?user=<?=$c_user?>">Change Password</a></li>
                 <li><a href="index.php?logout">Logout</a></li>
               </ul>
             </li>
@@ -43,8 +58,9 @@ else echo "Download Mode";
 ?>
               <b class="caret"></b></a>
               <ul class="dropdown-menu">
+		<li><a href="index.php?download=ext">Stream Mode</a></li>
                 <li><a href="index.php?download=m3u">Download Mode</a></li>
-                <li><a href="index.php?download=ext">Stream Mode</a></li>
+                
               </ul>
             </li>
         </div>
@@ -64,12 +80,19 @@ else echo "Download Mode";
 	<div class="nav navbar-nav navbar-right">
 	   <li><a href="tv_series.php">TV Series</a></li>
 	</div>
+	<div class="nav navbar-nav navbar-right">
+	   <li><a href="changelog.php" target=_blank>Changelog</a></li>
+	</div>
+	<div class="nav navbar-nav navbar-right">
+	
+	   <li><a href="#">Current Users Watching : <?= $active_users?></a></li>
+	</div>
         <form class="navbar-form navbar-right">
         </form>
     </div>
 </nav>
     <div class="page-header">
-        <h1>Media Library <small>just a media library...</small></h1>
+        <h1>Movies</h1>
     </div>
 <?php
 empty_temp_files($temp_dir);
@@ -79,6 +102,7 @@ foreach($files as $file) {
     if (isset(pathinfo($file)['extension']))
     	$ext = pathinfo($file)['extension'];
     else $ext ='';
+    
     $film = "";
     if (!is_dir($file) and in_array($ext, $video_extension))
         $film = create_m3u_from_file($file, $temp_dir);
@@ -91,8 +115,12 @@ foreach($files as $file) {
         echo "<a href='download.php?file=$file&extension=$ext'>";
     //else echo "<a href='player.php?file_to_play=$file target=_blank'>";
     else echo "<a href='stream.php?file=$file&exte=$ext' target=_blank'>";
+  
+    //echo "var/www/html/images/$film[name].jpg";
     echo "<img src='$film[image]' alt='$film[name]'>";
-    echo "<div class='caption'>$film[name]</div>";
+    $size = abs(filesize($file)/1000000000);
+    $round_size = round($size,2);
+    echo "<div class='caption'>$film[name] ($round_size GB)</div>";
     echo "</div></div></a>";
     $i++;
     if ($i % 4 == 0) echo "</div>";

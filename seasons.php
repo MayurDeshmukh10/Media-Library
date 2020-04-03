@@ -62,14 +62,17 @@ else echo "Download Mode";
             </li>
         </div>
 	<div class="nav navbar-nav navbar-right">
-	   <li><a href="#">TV Series</a></li>
+	   <li><a href="tv_series.php">TV Series</a></li>
+	</div>
+	<div class="nav navbar-nav navbar-right">
+	   <li><a href="index.php">Movies</a></li>
 	</div>
         <form class="navbar-form navbar-right">
         </form>
     </div>
 </nav>
     <div class="page-header">
-        <h1>Media Library <small>just a media library...</small></h1>
+        <h1>Seasons</h1>
     </div>
 <?php
 empty_temp_files($temp_dir);
