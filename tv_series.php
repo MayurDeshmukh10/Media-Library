@@ -6,6 +6,7 @@ private_zone();
 <!DOCTYPE html>
 <html>
 <head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <!-- JQuery -->
 <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
 <link rel="stylesheet" href="css/style.css" />
@@ -78,8 +79,12 @@ foreach($files as $file) {
     if ($_SESSION['download'] == 'm3u')
         echo "<a href='seasons.php?path=$file'>";
     else echo "<a href='seasons.php?path=$file'>";
-    echo "<img src='$film[image]' alt='$film[name]'>";
+    $search = $film[name];
+    $q = preg_replace("/\([^)]+\)/","",$search);
+    echo "<img src='images/$film[name].jpg' alt='$film[name]' >";
+    //echo "<img src='$film[image]' alt='$film[name]'>";
     echo "<div class='caption'>$film[name]</div>";
+    echo "<div class='caption'><a href='https://www.google.com/search?q=$q' target=_blank>Details</a></div>";
     echo "</div></div></a>";
     $i++;
     if ($i % 4 == 0) echo "</div>";

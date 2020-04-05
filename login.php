@@ -51,6 +51,7 @@ if (isset($_POST['username'])) {
 <!DOCTYPE html>
 <html>
 <head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <!-- JQuery -->
 <script src=" http://code.jquery.com/jquery-1.6.4.min.js" 
     type="text/javascript"></script>
